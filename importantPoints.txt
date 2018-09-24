@@ -1,0 +1,14 @@
+model
+dataset
+optimization function / 
+cost function / error function
+
+
+Improvement to convolution neural network
+
+Alex Net
+VGGNet
+Inception Net
+Capsule Net
+
+
