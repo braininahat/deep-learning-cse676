@@ -87,7 +87,10 @@ def apply_max_pool(x,kernel_size,stride_size):
 
 
 parent_dir = 'UrbanSound8K/audio/'
-sub_dirs= ['fold1', 'fold2']
+sub_dirs= ['fold1', 'fold2', 'fold3',
+           'fold4', 'fold5', 'fold6',
+           'fold7', 'fold8', 'fold9',
+           'fold10']
 features,labels = extract_features(parent_dir, sub_dirs)
 labels = one_hot_encode(labels)
 
@@ -141,6 +144,7 @@ accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 
 cost_history = np.empty(shape=[1], dtype=float)
 with tf.Session() as session:
+    writer = tf.summary.FileWriter('graphs/cnn/', session.graph)
     tf.global_variables_initializer().run()
 
     for itr in range(training_iterations):

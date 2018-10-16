@@ -135,7 +135,10 @@ def one_hot_encode(labels):
 
 parent_dir = 'UrbanSound8K/audio/'
 
-sub_dirs = ['fold1', 'fold2', 'fold3']
+sub_dirs = ['fold1', 'fold2', 'fold3',
+            'fold4', 'fold5', 'fold6',
+            'fold7', 'fold8', 'fold9',
+            'fold10']
 features, labels = parse_audio_files(parent_dir, sub_dirs)
 
 
@@ -185,6 +188,7 @@ accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 cost_history = np.empty(shape=[1],dtype=float)
 y_true, y_pred = None, None
 with tf.Session() as sess:
+    writer = tf.summary.FileWriter('graphs/mlp/', sess.graph)
     sess.run(init)
     for epoch in range(training_epochs):            
         _,cost = sess.run([optimizer,cost_function],feed_dict={X:train_x,Y:train_y})
