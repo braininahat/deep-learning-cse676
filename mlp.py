@@ -158,6 +158,7 @@ n_hidden_units_two = 300
 sd = 1 / np.sqrt(n_dim)
 learning_rate = 0.01
 
+tf.reset_default_graph()
 
 X = tf.placeholder(tf.float32, [None, n_dim])
 Y = tf.placeholder(tf.float32, [None, n_classes])
@@ -184,11 +185,15 @@ optimizer = tf.train.GradientDescentOptimizer(learning_rate).minimize(cost_funct
 correct_prediction = tf.equal(tf.argmax(y_,1), tf.argmax(Y,1))
 accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 
-
+tf.summary.scalar('mean', mean)
 cost_history = np.empty(shape=[1],dtype=float)
 y_true, y_pred = None, None
 with tf.Session() as sess:
+<<<<<<< HEAD
+    writer = tf.summary.FileWriter('./graphs', sess.graph)
+=======
     writer = tf.summary.FileWriter('graphs/mlp/', sess.graph)
+>>>>>>> 89d5c1b1c407a30f108f8becf6b814514f1ee2ee
     sess.run(init)
     for epoch in range(training_epochs):            
         _,cost = sess.run([optimizer,cost_function],feed_dict={X:train_x,Y:train_y})
